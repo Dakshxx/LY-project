@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { SearchHeader } from './SearchHeader';
 import { CategoryFilter } from './CategoryFilter';
 import { NewsFeed } from './NewsFeed';
-import { NewsArticle, NewsCategory } from '@/types/news';
+import { NewsArticle, NewsCategory, AISummary } from '@/types/news';
 import { mockNewsData } from '@/data/mockNews';
 import heroImage from '@/assets/news-hero.jpg';
 
@@ -17,6 +17,16 @@ export const NewsApp = () => {
       prev.map(article => 
         article.id === articleId 
           ? { ...article, isBookmarked: !article.isBookmarked }
+          : article
+      )
+    );
+  }, []);
+
+  const handleUpdateSummary = useCallback((articleId: string, summary: AISummary) => {
+    setArticles(prev => 
+      prev.map(article => 
+        article.id === articleId 
+          ? { ...article, aiSummary: summary }
           : article
       )
     );
@@ -78,6 +88,7 @@ export const NewsApp = () => {
         searchQuery={searchQuery}
         selectedCategory={selectedCategory}
         onToggleBookmark={handleToggleBookmark}
+        onUpdateSummary={handleUpdateSummary}
         showBookmarksOnly={showBookmarksOnly}
         onRefresh={handleRefresh}
       />

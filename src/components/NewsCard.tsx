@@ -1,27 +1,31 @@
 import { useState } from 'react';
-import { Clock, Bookmark, BookmarkCheck, Volume2, VolumeX, Play, Pause } from 'lucide-react';
+import { Clock, Bookmark, BookmarkCheck, Volume2, VolumeX, Play, Pause, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { NewsArticle } from '@/types/news';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { NewsArticle, AISummary } from '@/types/news';
 import { useSpeech } from '@/hooks/useSpeech';
 import { useToast } from '@/components/ui/use-toast';
+import { SummaryGenerator } from './SummaryGenerator';
 
 interface NewsCardProps {
   article: NewsArticle;
   onToggleBookmark: (id: string) => void;
+  onUpdateSummary: (id: string, summary: AISummary) => void;
 }
 
-export const NewsCard = ({ article, onToggleBookmark }: NewsCardProps) => {
+export const NewsCard = ({ article, onToggleBookmark, onUpdateSummary }: NewsCardProps) => {
   const { speak, stop, isSpeaking } = useSpeech();
   const { toast } = useToast();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showSummaryGenerator, setShowSummaryGenerator] = useState(false);
 
   const handleReadAloud = () => {
     if (isSpeaking) {
       stop();
     } else {
-      const textToRead = `${article.title}. ${article.summary}`;
+      const textToRead = article.aiSummary?.medium || `${article.title}. ${article.summary}`;
       speak(textToRead);
     }
   };
@@ -33,6 +37,10 @@ export const NewsCard = ({ article, onToggleBookmark }: NewsCardProps) => {
       description: article.title,
       duration: 2000,
     });
+  };
+
+  const handleSummaryGenerated = (summary: AISummary) => {
+    onUpdateSummary(article.id, summary);
   };
 
   const getCategoryStyles = (category: string) => {
@@ -69,6 +77,18 @@ export const NewsCard = ({ article, onToggleBookmark }: NewsCardProps) => {
             <Button
               variant="ghost"
               size="sm"
+              onClick={() => setShowSummaryGenerator(!showSummaryGenerator)}
+              className={`text-muted-foreground hover:text-primary transition-colors ${
+                article.aiSummary ? 'text-primary' : ''
+              }`}
+              title={article.aiSummary ? 'View AI Summary' : 'Generate AI Summary'}
+            >
+              <Sparkles className={`h-4 w-4 ${article.aiSummary ? 'text-primary' : ''}`} />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={handleReadAloud}
               className="text-muted-foreground hover:text-primary transition-colors"
             >
@@ -93,17 +113,43 @@ export const NewsCard = ({ article, onToggleBookmark }: NewsCardProps) => {
           {article.title}
         </h3>
 
-        <p className="text-muted-foreground mb-4 leading-relaxed">
-          {isExpanded ? article.summary : `${article.summary.slice(0, 150)}...`}
-          {article.summary.length > 150 && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-primary hover:underline ml-2 font-medium"
-            >
-              {isExpanded ? 'Show less' : 'Read more'}
-            </button>
-          )}
-        </p>
+        {/* AI Summary or Original Summary */}
+        {article.aiSummary && !showSummaryGenerator ? (
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">AI Summary</span>
+            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              {article.aiSummary.medium}
+            </p>
+          </div>
+        ) : (
+          <p className="text-muted-foreground mb-4 leading-relaxed">
+            {isExpanded ? article.summary : `${article.summary.slice(0, 150)}...`}
+            {article.summary.length > 150 && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="text-primary hover:underline ml-2 font-medium"
+              >
+                {isExpanded ? 'Show less' : 'Read more'}
+              </button>
+            )}
+          </p>
+        )}
+
+        {/* Summary Generator */}
+        <Collapsible open={showSummaryGenerator} onOpenChange={setShowSummaryGenerator}>
+          <CollapsibleContent>
+            <div className="mb-4">
+              <SummaryGenerator
+                content={article.content}
+                existingSummary={article.aiSummary}
+                onSummaryGenerated={handleSummaryGenerated}
+              />
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
 
         <div className="flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center gap-4">

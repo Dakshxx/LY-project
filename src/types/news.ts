@@ -10,6 +10,16 @@ export interface NewsArticle {
   imageUrl?: string;
   readTime: number;
   isBookmarked: boolean;
+  aiSummary?: AISummary;
+}
+
+export interface AISummary {
+  short: string;
+  medium: string;
+  detailed: string;
+  keyPoints: string[];
+  sentiment: 'positive' | 'negative' | 'neutral';
+  generatedAt: string;
 }
 
 export type NewsCategory = 
@@ -27,3 +37,5 @@ export interface CategoryConfig {
   gradient: string;
   icon: string;
 }
+
+export type SummaryLength = 'short' | 'medium' | 'detailed';

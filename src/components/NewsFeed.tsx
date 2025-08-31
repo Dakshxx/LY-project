@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { NewsCard } from './NewsCard';
-import { NewsArticle, NewsCategory } from '@/types/news';
+import { NewsArticle, NewsCategory, AISummary } from '@/types/news';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, BookmarkX } from 'lucide-react';
 
@@ -9,6 +9,7 @@ interface NewsFeedProps {
   searchQuery: string;
   selectedCategory: NewsCategory;
   onToggleBookmark: (id: string) => void;
+  onUpdateSummary: (id: string, summary: AISummary) => void;
   showBookmarksOnly: boolean;
   onRefresh: () => void;
 }
@@ -18,6 +19,7 @@ export const NewsFeed = ({
   searchQuery, 
   selectedCategory, 
   onToggleBookmark,
+  onUpdateSummary,
   showBookmarksOnly,
   onRefresh
 }: NewsFeedProps) => {
@@ -117,6 +119,7 @@ export const NewsFeed = ({
             key={article.id}
             article={article}
             onToggleBookmark={onToggleBookmark}
+            onUpdateSummary={onUpdateSummary}
           />
         ))}
       </div>

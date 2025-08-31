@@ -1,11 +1,23 @@
 import { NewsArticle } from '@/types/news';
+import { extendedMockNews } from './extendedMockNews';
 
 export const mockNewsData: NewsArticle[] = [
+  ...extendedMockNews,
   {
     id: '1',
     title: 'Breaking: Major Technology Breakthrough in AI Research Announced',
     summary: 'Scientists have developed a new artificial intelligence system that can process and understand human emotions with unprecedented accuracy. This breakthrough could revolutionize healthcare, education, and customer service industries. The research, conducted over three years, involved teams from leading universities worldwide.',
-    content: 'Full article content here...',
+    content: `A team of international researchers has achieved a groundbreaking milestone in artificial intelligence development, creating an advanced AI system capable of processing and understanding human emotions with unprecedented accuracy levels reaching 94.5%. This revolutionary breakthrough, announced at the World AI Conference in Singapore, represents three years of collaborative research involving teams from leading universities across the United States, Europe, and Asia.
+
+The new AI system, dubbed "EmotiQ," utilizes advanced deep learning algorithms combined with multimodal analysis techniques to interpret human emotions through facial expressions, voice patterns, body language, and even physiological indicators such as heart rate variability and skin conductance. Unlike previous emotion recognition systems that relied primarily on visual cues, EmotiQ integrates multiple data streams to create a comprehensive emotional profile.
+
+Dr. Sarah Chen, the lead researcher from MIT who spearheaded the project, explained that the system goes beyond simple emotion classification. "EmotiQ doesn't just identify whether someone is happy or sad," Dr. Chen noted. "It understands the nuances of human emotional states, recognizing complex emotions like nostalgic happiness, anxious excitement, or conflicted satisfaction. This level of emotional granularity has never been achieved before in AI systems."
+
+The breakthrough has immediate applications across multiple industries. In healthcare, EmotiQ could revolutionize mental health diagnosis and treatment by providing objective measurements of patient emotional states, helping clinicians identify depression, anxiety, and other mental health conditions more accurately. Early trials at Massachusetts General Hospital showed the system could detect early signs of depression with 91% accuracy, often identifying symptoms before patients themselves recognized them.
+
+Educational applications are equally promising. The system can monitor student engagement and emotional responses during learning, allowing educators to adapt their teaching methods in real-time. Pilot programs in schools have shown 23% improvement in student comprehension when teachers used EmotiQ feedback to adjust their instruction styles.
+
+Customer service industries are already expressing significant interest in the technology. Major corporations see potential for creating more empathetic AI assistants that can respond appropriately to customer emotions, potentially reducing customer service complaints by up to 40% according to preliminary studies.`,
     category: 'tech',
     source: 'TechDaily',
     author: 'Dr. Sarah Chen',
