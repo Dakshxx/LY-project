@@ -63,6 +63,23 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			backgroundImage: {
+				'gradient-politics': 'var(--gradient-politics)',
+				'gradient-sports': 'var(--gradient-sports)',
+				'gradient-tech': 'var(--gradient-tech)',
+				'gradient-business': 'var(--gradient-business)',
+				'gradient-entertainment': 'var(--gradient-entertainment)',
+				'gradient-health': 'var(--gradient-health)',
+			},
+			boxShadow: {
+				'card': 'var(--shadow-card)',
+				'card-hover': 'var(--shadow-card-hover)',
+				'button': 'var(--shadow-button)',
+			},
+			transitionTimingFunction: {
+				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
+				'bounce': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',

@@ -2,41 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* News App Design System - Professional, clean, and accessible */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 248 50% 98%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 210 85% 28%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 15% 95%;
+    --secondary-foreground: 215 25% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 24 85% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 25% 88%;
+    --input: 210 25% 90%;
+    --ring: 210 85% 28%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* News-specific colors */
+    --news-primary: 210 85% 28%;
+    --news-accent: 24 85% 55%;
+    --news-success: 142 75% 45%;
+    --news-warning: 45 90% 55%;
+    --news-info: 200 85% 50%;
+
+    /* Category gradients */
+    --gradient-politics: linear-gradient(135deg, hsl(210 85% 28%), hsl(225 75% 45%));
+    --gradient-sports: linear-gradient(135deg, hsl(142 75% 45%), hsl(120 65% 55%));
+    --gradient-tech: linear-gradient(135deg, hsl(260 75% 55%), hsl(280 65% 65%));
+    --gradient-business: linear-gradient(135deg, hsl(24 85% 55%), hsl(35 75% 60%));
+    --gradient-entertainment: linear-gradient(135deg, hsl(300 75% 55%), hsl(320 65% 65%));
+    --gradient-health: linear-gradient(135deg, hsl(340 75% 55%), hsl(355 65% 65%));
+
+    /* Shadows and effects */
+    --shadow-card: 0 2px 10px -2px hsl(215 25% 15% / 0.08);
+    --shadow-card-hover: 0 8px 25px -8px hsl(215 25% 15% / 0.15);
+    --shadow-button: 0 2px 8px -2px hsl(210 85% 28% / 0.2);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     --sidebar-background: 0 0% 98%;
 
