@@ -46,7 +46,7 @@ export const NewsApp = () => {
   const bookmarkCount = articles.filter(article => article.isBookmarked).length;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background">
       <SearchHeader
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
