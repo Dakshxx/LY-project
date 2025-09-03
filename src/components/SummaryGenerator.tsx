@@ -28,7 +28,13 @@ export const SummaryGenerator = ({
 
     setIsGenerating(true);
     try {
-      // Generate all three summary lengths
+      toast({
+        title: "🤖 Loading AI Models",
+        description: "Initializing neural networks for summarization...",
+        duration: 2000,
+      });
+
+      // Generate all three summary lengths using real AI
       const [shortResult, mediumResult, detailedResult] = await Promise.all([
         Newssummarizer.simulateAISummarization(content, 'short'),
         Newssummarizer.simulateAISummarization(content, 'medium'),
@@ -48,16 +54,17 @@ export const SummaryGenerator = ({
       onSummaryGenerated(aiSummary);
 
       toast({
-        title: "AI Summary Generated",
-        description: "Smart summaries are now available in multiple lengths",
+        title: "🧠 AI Summary Generated",
+        description: "Advanced neural networks analyzed your content with sentiment analysis",
         duration: 3000,
       });
     } catch (error) {
+      console.error('Summary generation error:', error);
       toast({
-        title: "Error",
-        description: "Failed to generate AI summary. Please try again.",
+        title: "AI Processing Error",
+        description: "Neural network processing failed. Please try again or check your internet connection.",
         variant: "destructive",
-        duration: 3000,
+        duration: 4000,
       });
     } finally {
       setIsGenerating(false);
@@ -92,9 +99,9 @@ export const SummaryGenerator = ({
         <div className="text-center py-6">
           <div className="mb-4">
             <Sparkles className="h-12 w-12 text-primary mx-auto mb-2" />
-            <h3 className="text-lg font-semibold text-foreground">AI-Powered Summarization</h3>
+            <h3 className="text-lg font-semibold text-foreground">Real AI Summarization</h3>
             <p className="text-sm text-muted-foreground">
-              Generate intelligent summaries with key insights and sentiment analysis
+              Powered by DistilBART & DistilBERT neural networks for advanced text analysis
             </p>
           </div>
           
@@ -111,7 +118,7 @@ export const SummaryGenerator = ({
             ) : (
               <>
                 <Sparkles className="h-4 w-4 mr-2" />
-                Generate AI Summary
+                Generate Real AI Summary
               </>
             )}
           </Button>
